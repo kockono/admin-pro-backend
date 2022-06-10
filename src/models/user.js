@@ -29,4 +29,11 @@ let usuariosSchema = new Schema({
         }
 }, {timestamps: true});
 
+// Remapear el id a uid 
+usuariosSchema.method('toJSON', function(){
+  const {__v, _id, ...object } = this.toObject();
+  object.uid = _id;
+  return object;
+});
+
 module.exports = model('users', usuariosSchema);

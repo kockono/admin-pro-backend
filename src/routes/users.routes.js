@@ -8,8 +8,8 @@ const { validateForms } = require('../middlewares/validar-campos');
 const router = Router();
 
 /**
- * @Route  http://localhost:3501/api/usuarios/}
- * @validateForms - Siempre debe ser el ultimo argumento del [] arreglo de validacioner
+ * @Route  http://localhost:3501/api/usuarios/
+ * @validateForms - Siempre debe ser el ultimo argumento del [] las validaciones
  */
 
 router.get('/', getUsers );

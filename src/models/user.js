@@ -27,11 +27,12 @@ let usuariosSchema = new Schema({
           type: Boolean,
           default: false
         }
-}, {timestamps: true});
+}, {timestamps: true}); // Timestamps tiempos de creacion del dato
 
-// Remapear el id a uid 
+
+// Remapear el id a uid, renombrar basicamente el uid de mongodb a id
 usuariosSchema.method('toJSON', function(){
-  const {__v, _id, ...object } = this.toObject();
+  const {__v, _id, password, ...object } = this.toObject();
   object.uid = _id;
   return object;
 });

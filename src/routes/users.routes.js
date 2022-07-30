@@ -1,4 +1,6 @@
 const { Router } = require('express');
+
+// Controllers
 const { getUsers, createUser } = require('../controllers/users');
 
 // Validators
@@ -10,6 +12,9 @@ const router = Router();
 /**
  * @Route  http://localhost:3501/api/usuarios/
  * @validateForms - Siempre debe ser el ultimo argumento del [] las validaciones
+ * 
+ * ---------------- Controllers ------------
+ * @getUsers - Nos trae 
  */
 
 router.get('/', getUsers );
@@ -24,7 +29,7 @@ router.post('/create',
 createUser 
 );
 
-
+router.put('/:id', getUsers)
 
 
 

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 // Controllers
-const { getUsers, createUser } = require('../controllers/users');
+const { getUsers, createUser, updateUser } = require('../controllers/users');
 
 // Validators
 const { check } = require('express-validator'); // Version  6.14.1
@@ -29,7 +29,7 @@ router.post('/create',
 createUser 
 );
 
-router.put('/:id', getUsers)
+router.put('/:id', updateUser)
 
 
 

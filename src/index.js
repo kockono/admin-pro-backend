@@ -15,7 +15,6 @@ app.use(express.json()); // Read and parse application/json
 app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 
 // Rutas
-// app.use('/api', require('./routes/login.routes') );
 app.use('/api/usuarios', require('./routes/users.routes') );
 
 // Servidor

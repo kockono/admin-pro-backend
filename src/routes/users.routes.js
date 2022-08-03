@@ -23,6 +23,7 @@ const router = Router();
  * @deleteUser - Elimina un usuario cambiando el status a -1
  *
  * @validateForms - Siempre debe ser el ultimo parametro del [] de validaciones
+ * @check - Argumentos que recibe: (Campo, Mensaje, Validaciones al Campo)
  */
 
 router.get('/', getUsers );

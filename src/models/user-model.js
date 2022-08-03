@@ -1,5 +1,11 @@
 const { Schema, model } = require('mongoose');
 
+/**
+ * @var trim    - Elimina los espacios      
+ * @var type    - Tipado del dato   
+ * @var default - Dato asignado por default
+ */
+
 let usuariosSchema = new Schema({
         name: {
             type: String,

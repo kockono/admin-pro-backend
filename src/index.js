@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true })); // parse application/x-www-form
 
 // Rutas
 app.use('/api/usuarios', require('./routes/users.routes') );
+app.use('/api/login', require('./routes/auth.routes') );
 
 // Servidor
 app.listen(PORT, () => console.log(`Escuchando por el puerto ${PORT}`) );

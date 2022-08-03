@@ -14,8 +14,8 @@ const bcrypt = require('bcryptjs');
 const getUsers = async(req, res ) => {
 
   /**  
-   * @var { status: 1} - Es el where, En esta peticion buscamos todos los usuarios con status 1
-   * @var { name email role google } - Los campos que nos queremos traer con el get
+   * @var { status: 1} - En esta peticion buscamos todos los usuarios con status 1 : WHERE status = 1;
+   * @var { name email role google } - Los campos de la base de datos que nos va a traer
    */
 
   const usuario = await UsuarioModel.find({ status: 1}, 'name email role google');
@@ -122,7 +122,7 @@ const deleteUser =  async(req, res = response ) => {
     }
 
     /**  
-     * @var { status } - 0 = Eliminado, 1 Activo
+     * @var { status } - 0 = Suspendido, 1 Activo, -1 = Eliminado
      */
 
     // Actualizaciones

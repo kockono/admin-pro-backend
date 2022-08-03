@@ -1,20 +1,35 @@
-// Modelos
-const UsuarioModel = require('../models/user-model');
 const { response } = require('express');
 
-//Encryptamiento de contraseñas
+// Modelos
+const UsuarioModel = require('../models/user-model');
+
+// Encriptador
 const bcrypt = require('bcryptjs');
 
-/**  
- * @status_400  - Bad Request
- * 
- * @var { salt } - Data aleatoria
- */
+  /**
+   * ----------- Estados -----------
+   * @status_200 - Ok
+   * @status_404 - Not Found
+   * @status_403 - Forbidden
+   * @status_402 - Payment Required
+   * @status_401 - Unauthorized
+   * @status_400 - Bad Request
+   * @status_500 - Internal Server Error
+   * 
+   * ----------- Encrypt -----------
+   * @var { salt } - Data aleatoria
+   * 
+   * ----------------------------------- Controllers -----------------------------------
+   * @see {@link getUsers()}   - Metodo para traer todos los usuarios 
+   * @see {@link createUser()} - Metodo para crear un usuario
+   * @see {@link updateUser()} - Metodo para actualizar un usuario
+   * @see {@link deleteUser()} - Metodo para eliminar un usuario ( Cambia el status a 0 )
+   */
 
 const getUsers = async(req, res ) => {
 
-  /**  
-   * @var { status: 1} - En esta peticion buscamos todos los usuarios con status 1 : WHERE status = 1;
+  /**
+   * @var {{status: 1}} - En esta peticion buscamos todos los usuarios con status 1 : WHERE status = 1;
    * @var { name email role google } - Los campos de la base de datos que nos va a traer
    */
 
@@ -28,18 +43,19 @@ const getUsers = async(req, res ) => {
 }
 
 const createUser = async(req, res = response ) => {
-  const { email, password, name } = req.body;
+
+  const { email, password } = req.body;
   
   try {
     const existeEmail = await UsuarioModel.findOne({email})
 
-    if ( existeEmail ) { return res.status(400).json({ msg: 'Correo Ya registrado' }); }
+    if ( existeEmail ) { return res.status(400).json({ msg: 'Correo ya registrado' }); }
 
     const usuario = new UsuarioModel( req.body ); // Creamos una instancea de nuestra clase con sus propiedades
     const salt = bcrypt.genSaltSync();            // Ya no es necesario el await con Sync()
     usuario.password = bcrypt.hashSync(password, salt);
 
-    // Guardar Usuario
+    // Guarda el Usuario
     await usuario.save(); 
 
     res.json({ok: true, usuario})
@@ -106,6 +122,7 @@ const updateUser = async(req, res = response ) => {
 
 const deleteUser =  async(req, res = response ) => {
 
+  // Guarda el id del request
   const uid = req.params.id;
 
   try {
@@ -122,11 +139,11 @@ const deleteUser =  async(req, res = response ) => {
     }
 
     /**  
-     * @var { status } - 0 = Suspendido, 1 Activo, -1 = Eliminado
+     * @var { status } -  1 Activo, 0 = Suspendido, -1 = Eliminado
      */
 
-    // Actualizaciones
-    req.body.status = 0
+
+    req.body.status = -1
 
     // Recibe una id, y los campos a actualizar { new: true } - Nos manda el usuario actualizado el nuevo nombre
     // Requiere un Objeto para actualizar el modelo de la base de datos
@@ -147,7 +164,6 @@ const deleteUser =  async(req, res = response ) => {
   }
 
 }
-
 
 module.exports = {
   getUsers,

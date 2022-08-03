@@ -16,7 +16,7 @@ const router = Router();
  * @api PUT  http://localhost:3501/api/usuarios/:id        => @updateUser       
  * @api PUT  http://localhost:3501/api/usuarios/delete/:id => @deleteUser               
  * 
- * --------------------- Direccion De Controllers -----------------------
+ * --------------------- Direcciones De Controllers -----------------------
  * @getUsers   - Traer todos los usuarios 
  * @createUser - Crear un usuario nuevo
  * @updateUser - Actualizar un usuario ya existente

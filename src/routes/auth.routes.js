@@ -12,7 +12,7 @@ const router = Router();
  * ----------------------------- Apis -----------------------------------
  * @api POST  http://localhost:3501/api/login/  => @login
  * 
- * --------------------- Direccion De Controllers -----------------------
+ * --------------------- Direcciones De Controllers -----------------------
  * @login - Verifica si el email y password son iguales para loguearse
  */
 

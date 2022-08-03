@@ -3,19 +3,26 @@ const { Router } = require('express');
 // Controllers
 const { getUsers, createUser, updateUser, deleteUser } = require('../controllers/users-controller');
 
-// Validators
+// Validadors de body, formularios, post
 const { check } = require('express-validator'); // Version  6.14.1
 const { validateForms } = require('../middlewares/validate-fields');  
 
 const router = Router();
 
 /**
- * @Route  http://localhost:3501/api/usuarios/
- * @validateForms - Siempre debe ser el ultimo argumento del [] las validaciones
+ * ----------------------------- Apis -----------------------------------
+ * @api GET  http://localhost:3501/api/usuarios/           => @getUsers     
+ * @api POST http://localhost:3501/api/usuarios/create     => @createUser           
+ * @api PUT  http://localhost:3501/api/usuarios/:id        => @updateUser       
+ * @api PUT  http://localhost:3501/api/usuarios/delete/:id => @deleteUser               
  * 
- * ---------------- Controllers ------------
- * @getUsers   - Nos trae todos los usuarios
+ * ---------------------------- Controllers -----------------------------
+ * @getUsers   - Dirección del controlador para traer todos los usuarios 
  * @createUser - Dirección del controlador para crear un usuario
+ * @updateUser - Dirección del controlador para actualizar un usuario
+ * @deleteUser - Dirección del controlador para eliminar un usuario
+ *
+ * @validateForms - Siempre debe ser el ultimo parametro del [] de validaciones
  */
 
 router.get('/', getUsers );
@@ -27,7 +34,7 @@ router.post('/create',
       check('email', 'El email es obligatorio').isEmail(),
       validateForms // Last Param Always
   ],
-createUser  // Dirección de la ruta
+createUser // Dirección de la ruta
 );
 
 router.put('/:id', 
@@ -40,9 +47,7 @@ router.put('/:id',
   updateUser 
 );
 
-router.put('/delete/:id', 
-  deleteUser
-);
+router.put('/delete/:id', deleteUser);
 
 
 module.exports = router;

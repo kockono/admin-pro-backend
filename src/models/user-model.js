@@ -26,6 +26,9 @@ let usuariosSchema = new Schema({
         google: {
           type: Boolean,
           default: false
+        }, status:{
+          type: Number,
+          default: 1
         }
 }, {timestamps: true}); // Timestamps tiempos de creacion del dato
 

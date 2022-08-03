@@ -9,9 +9,10 @@ const { check } = require('express-validator'); // Version  6.14.1
 const router = Router();
 
 /**
+ * ----------------------------- Apis -----------------------------------
  * @api POST  http://localhost:3501/api/login/  => @login
  * 
- * ----------------------------------- Controllers ------------------------------------
+ * --------------------- Direccion De Controllers -----------------------
  * @login - Verifica si el email y password son iguales para loguearse
  */
 

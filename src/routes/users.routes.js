@@ -16,11 +16,11 @@ const router = Router();
  * @api PUT  http://localhost:3501/api/usuarios/:id        => @updateUser       
  * @api PUT  http://localhost:3501/api/usuarios/delete/:id => @deleteUser               
  * 
- * ---------------------------- Controllers -----------------------------
- * @getUsers   - Dirección del controlador para traer todos los usuarios 
- * @createUser - Dirección del controlador para crear un usuario
- * @updateUser - Dirección del controlador para actualizar un usuario
- * @deleteUser - Dirección del controlador para eliminar un usuario
+ * --------------------- Direccion De Controllers -----------------------
+ * @getUsers   - Traer todos los usuarios 
+ * @createUser - Crear un usuario nuevo
+ * @updateUser - Actualizar un usuario ya existente
+ * @deleteUser - Elimina un usuario cambiando el status a -1
  *
  * @validateForms - Siempre debe ser el ultimo parametro del [] de validaciones
  */

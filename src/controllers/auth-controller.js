@@ -1,9 +1,11 @@
 const { response } = require('express');
 
+
 // Encriptador
 const bcrypt = require('bcryptjs');
 
 const UsuarioModel = require('../models/user-model');
+const { generateJWT } = require('../helpers/jwt');
 
 /**
  *
@@ -32,7 +34,10 @@ const login = async(req, res = response ) => {
       });
     }
 
-    res.json({ ok: true, msg: `Bienvenido ${usuarioDB.name}`})
+    // Retorna una promesa así que se ocupa el await
+    const token = await generateJWT(usuarioDB.id);
+
+    res.json({ ok: true, msg: `Bienvenido ${usuarioDB.name}`, token})
 
   } catch (error) {
     console.log( error );
@@ -40,8 +45,6 @@ const login = async(req, res = response ) => {
   }
 
 }
-
-
 
 
 module.exports = {

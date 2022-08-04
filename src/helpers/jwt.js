@@ -1,8 +1,5 @@
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
-
-console.log( process.env.JWT_SECRET )
-// console.log( dotenv )
 
 const generateJWT = async ( uid ) => {
 

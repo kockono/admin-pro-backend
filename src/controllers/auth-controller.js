@@ -1,6 +1,5 @@
 const { response } = require('express');
 
-
 // Encriptador
 const bcrypt = require('bcryptjs');
 
@@ -8,7 +7,6 @@ const UsuarioModel = require('../models/user-model');
 const { generateJWT } = require('../helpers/jwt');
 
 /**
- *
  * ----------------------------------- Controllers ------------------------------------
  * @login - Dirección del controlador para verificar si el email y password son iguales 
  * 

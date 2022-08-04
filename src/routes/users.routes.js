@@ -6,6 +6,7 @@ const { getUsers, createUser, updateUser, deleteUser } = require('../controllers
 // Validadors de body, formularios, post
 const { check } = require('express-validator'); // Version  6.14.1
 const { validateForms } = require('../middlewares/validate-fields');  
+const { validateJwt } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
@@ -22,11 +23,13 @@ const router = Router();
  * @updateUser - Actualizar un usuario ya existente
  * @deleteUser - Elimina un usuario cambiando el status a -1
  *
- * @validateForms - Siempre debe ser el ultimo parametro del [] de validaciones
+ * ------------------------------- Middlewares --------------------------------
  * @check - Argumentos que recibe: (Campo, Mensaje, Validaciones al Campo)
+ * @validateJwt   - Valida el JsonWebToken
+ * @validateForms - Siempre debe ser el ultimo parametro del [] de validaciones
  */
 
-router.get('/', getUsers );
+router.get('/', validateJwt, getUsers );
 
 router.post('/create', 
   [

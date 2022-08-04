@@ -12,10 +12,10 @@ const router = Router();
 
 /**
  * ----------------------------- Apis -----------------------------------
- * @api GET  http://localhost:3501/api/usuarios/           => @getUsers     
- * @api POST http://localhost:3501/api/usuarios/create     => @createUser           
- * @api PUT  http://localhost:3501/api/usuarios/:id        => @updateUser       
- * @api PUT  http://localhost:3501/api/usuarios/delete/:id => @deleteUser               
+ * @api_getUsers   GET  http://localhost:3501/api/usuarios/               
+ * @api_createUser POST http://localhost:3501/api/usuarios/create               
+ * @api_updateUser PUT  http://localhost:3501/api/usuarios/:id              
+ * @api_deleteUser PUT  http://localhost:3501/api/usuarios/delete/:id               
  * 
  * --------------------- Direcciones De Controllers -----------------------
  * @getUsers   - Traer todos los usuarios 
@@ -41,8 +41,9 @@ router.post('/create',
 createUser // Dirección de la ruta
 );
 
-router.put('/:id', 
+router.put('/:id',
     [
+      validateJwt,
       check('name', 'El name es obligatorio').not().isEmpty(),
       check('email', 'El email es obligatorio').not().isEmpty(),
       check('role', 'El role es obligatorio').not().isEmpty(),
@@ -51,7 +52,7 @@ router.put('/:id',
   updateUser 
 );
 
-router.put('/delete/:id', deleteUser);
+router.put('/delete/:id', validateJwt, deleteUser);
 
 
 module.exports = router;

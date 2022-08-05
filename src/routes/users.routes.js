@@ -17,7 +17,7 @@ const router = Router();
  * @api_updateUser PUT  http://localhost:3501/api/usuarios/:id              
  * @api_deleteUser PUT  http://localhost:3501/api/usuarios/delete/:id               
  * 
- * --------------------- Direcciones De Controllers -----------------------
+ * ------------------ Explicaciones De Controllers -----------------------
  * @getUsers   - Traer todos los usuarios 
  * @createUser - Crear un usuario nuevo
  * @updateUser - Actualizar un usuario ya existente
@@ -26,7 +26,8 @@ const router = Router();
  * ------------------------------- Middlewares --------------------------------
  * @check - Argumentos que recibe: (Campo, Mensaje, Validaciones al Campo)
  * @validateJwt   - Valida el JsonWebToken
- * @validateForms - Siempre debe ser el ultimo parametro del [] de validaciones
+ * @validateForms - Siempre debe ser el ultimo parametro del [] de validaciones,
+ * ultimo parametro del arreglo siempre
  */
 
 router.get('/', validateJwt, getUsers );

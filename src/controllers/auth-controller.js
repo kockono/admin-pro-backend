@@ -8,7 +8,8 @@ const { generateJWT } = require('../helpers/jwt');
 
 /**
  * ----------------------------------- Controllers ------------------------------------
- * @login - Dirección del controlador para verificar si el email y password son iguales 
+ * @function {@link login()}  - Verifica si el email y password son iguales
+ * @function {@link logout()} - Cierra sesión y elimina la Jwt del usuario
  * 
  * @var usuarioDB - Nos trae el usuario con todas sus propiedades desde la base de datos
  */
@@ -42,9 +43,14 @@ const login = async(req, res = response ) => {
     res.status(500).json({ ok: false, msg: 'Hable con el administrador'})
   }
 
-}
+};
+
+const logout = async(req, res = response ) => {
+
+};
 
 
 module.exports = {
   login,
+  logout
 }

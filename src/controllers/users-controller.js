@@ -3,7 +3,7 @@ const { response } = require('express');
 // Modelos
 const UsuarioModel = require('../models/user-model');
 
-// Encriptador
+// Encriptamiento de contraseñas
 const bcrypt = require('bcryptjs');
 
   /**
@@ -20,10 +20,10 @@ const bcrypt = require('bcryptjs');
    * @var { salt } - Data aleatoria
    * 
    * ----------------------------------- Controllers -----------------------------------
-   * @see {@link getUsers()}   - Metodo para traer todos los usuarios 
-   * @see {@link createUser()} - Metodo para crear un usuario
-   * @see {@link updateUser()} - Metodo para actualizar un usuario
-   * @see {@link deleteUser()} - Metodo para eliminar un usuario ( Cambia el status a 0 )
+   * @function {@link getUsers()}   - Traer todos los usuarios 
+   * @function {@link createUser()} - Crear un usuario
+   * @function {@link updateUser()} - Actualizar un usuario (Se requiere la JWT del usuario)
+   * @function {@link deleteUser()} - Eliminar un usuario ( Cambia el status a 0 )
    */
 
 const getUsers = async(req, res ) => {

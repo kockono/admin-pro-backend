@@ -10,9 +10,9 @@ const router = Router();
 
 /**
  * ----------------------------- Apis -----------------------------------
- * @api POST  http://localhost:3501/api/login/  => @login
+ * @api_login POST  http://localhost:3501/api/login/  
  * 
- * --------------------- Direcciones De Controllers -----------------------
+ * ------------------ Explicaciones De Controllers -----------------------
  * @login - Verifica si el email y password son iguales para loguearse
  */
 

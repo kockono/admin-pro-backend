@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const connectLocalDB = require('./config/mongoDBLocal');
+const connectLocalDB = require('./database/mongoDBLocal');
 connectLocalDB();
 // const connectAtlas    = require('./config/mongoDBAtlas');
 // connectAtlas(); // Conexion con la base de datos
@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true })); // parse application/x-www-form
 
 // Rutas
 app.use('/api/usuarios', require('./routes/users.routes') );
+app.use('/api/hospital', require('./routes/hospitals.routes') );
 app.use('/api/login', require('./routes/auth.routes') );
 
 // Servidor

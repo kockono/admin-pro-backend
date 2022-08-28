@@ -1,5 +1,7 @@
 const { response } = require('express');
 
+const HospitalModel = require('../models/hospital-model');
+
 /** ----------------------------------- Controllers -----------------------------------
 * @function {@link getHospitals()}   - Traer todos los usuarios 
 * @function {@link createHospital()} - Crear un usuario
@@ -13,7 +15,32 @@ const getHospitals = (req, res = response ) => {
 
 }
 
-const createHospital = (req, res = response ) => {
+const createHospital = async (req, res = response ) => {
+
+    const uid = req.uid;
+
+    const hospital = new HospitalModel({
+    usuario:uid,
+    ...req.body
+  });
+
+
+  try {
+
+    const hospitalDB = await hospital.save();
+
+    res.json({ 
+        ok: true,
+        hospital: hospitalDB,
+        msg: 'Hospital creado con existo'
+    })
+    
+  } catch (error) {
+    res.status(500).json({
+        ok:false,
+        msg:'Habl con el administrador'
+    })
+  }
 
   res.json( { msg: 'Todo bien' } );
 

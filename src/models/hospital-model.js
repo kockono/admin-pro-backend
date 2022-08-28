@@ -18,12 +18,13 @@ let HospitalSchema = new Schema({
         }, 
         usuario: { 
           type: Schema.Types.ObjectId,
+          required: true
         },
         status:{
           type: Number,
           default: 1
         }
-}, { collection: 'hospitals', timestamps: true });  // Timestamps tiempos de creacion del dato
+}, { collection: 'hospitales', timestamps: true });  // Timestamps tiempos de creacion del dato
 
 
 // Elimina el __v a la hora de guardar en mongodb
@@ -32,4 +33,4 @@ HospitalSchema.method('toJSON', function(){
   return object;
 });
 
-module.exports = model('Users', HospitalSchema);
+module.exports = model('Hospitales', HospitalSchema);

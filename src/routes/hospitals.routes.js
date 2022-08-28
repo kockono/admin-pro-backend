@@ -23,7 +23,9 @@ const router = Router();
 
  router.post('/create', 
    [
-
+    validateJwt,
+    check('name','El nombre del hospital es necesario').not().isEmpty(),
+    validateForms
    ],
    createHospital
  );

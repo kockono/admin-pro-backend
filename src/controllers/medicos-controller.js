@@ -11,12 +11,20 @@ const MedicoModel = require('../models/medicos-model');
 */
 
 const getMedicos = async (req, res = response ) => {
-    const usuario = await MedicoModel.find({ status: 1}, 'name email role google');
+
+  /**
+   * @var {{status: 1}} - En esta peticion buscamos todos los usuarios con status 1 : WHERE status = 1;
+   * @populate - Los campos de la base de datos que nos va a traer por medio de la id
+   */
+  
+    const medico = await MedicoModel.find({ status: 1}, 'name email role google')
+                                    .populate('hospital', 'name')
+                                    .populate('usuario', 'name');
 
     res.json({
       ok:true,
-      mg: 'Get Usuario',
-      usuarios: [usuario]
+      msg: 'Get medico',
+      medicos: [medico]
     });
 
 
@@ -24,21 +32,20 @@ const getMedicos = async (req, res = response ) => {
 
 const createMedico = async (req, res = response ) => {
 
-    const { email, password } = req.body;
+    const uid = req.uid;
+    const medico  = await new MedicoModel( { 
+        usuario: uid,
+        ...req.body
+
+    } ); 
+
   
     try {
-      const existeEmail = await MedicoModel.findOne({email})
   
-      if ( existeEmail ) { return res.status(400).json({ msg: 'Correo ya registrado' }); }
+      // Guarda el medico
+      await medico.save(); 
   
-      const usuario    = new MedicoModel( req.body ); // Creamos una instancea de nuestra clase con sus propiedades
-      const salt       = bcrypt.genSaltSync();         // Ya no es necesario el await con Sync()
-      usuario.password = bcrypt.hashSync(password, salt);
-  
-      // Guarda el Usuario
-      await usuario.save(); 
-  
-      res.json({ok: true, usuario})
+      res.json({ok: true, medico})
   
     } catch (error) {
       console.log( error );
@@ -46,7 +53,7 @@ const createMedico = async (req, res = response ) => {
   
     }
   
-    res.json({ ok:true, usuario: usuario });
+    res.json({ ok:true, medico: medico });
 
 }
 

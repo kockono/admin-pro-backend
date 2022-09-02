@@ -1,5 +1,8 @@
 const { Router } = require('express');
 
+// Middlewares
+const { validateJwt } = require('../middlewares/validate-jwt');
+
 // Controllers
 const { getMedicos, createMedico, updateMedico, deleteMedico } = require('../controllers/medicos-controller');
 
@@ -11,10 +14,9 @@ const router = Router();
 
 /**
  * ----------------------------- Apis -----------------------------------
- * @api_hospital GET  http://localhost:3501/api/hospital/  
+ * @api_createMedico  POST http://localhost:3501/api/medicos/create  
+ * @api_getMedicos    GET  http://localhost:3501/api/medicos/        
  * 
- * ------------------ Explicaciones De Controllers -----------------------
- * @hospital -
  */
  
 
@@ -22,7 +24,10 @@ const router = Router();
 
  router.post('/create', 
    [
-
+    validateJwt,
+    check('name', 'El name es obligatorio').not().isEmpty(),
+    check('hospital','La id mandada no es válida').isMongoId(), // Valida el Id de MongoDb
+    validateForms 
    ],
    createMedico
  );

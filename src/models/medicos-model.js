@@ -18,17 +18,19 @@ let MedicosSchema = new Schema({
         }, 
         usuario: { 
           type: Schema.Types.ObjectId,
-          ref:'Users'
+          ref:'Users',
+          required: true
         },
         hospital: { 
-            type: Schema.Types.ObjectId,
-            ref:'hospital'
-          },
+            type: Schema.Types.ObjectId, // La Id del hospital
+            ref:'Hospitales', // Al Modelo que hace referencia, Cuentan las Mayusculas y Minusculas
+            required: true
+        },
         status:{
           type: Number,
           default: 1
         }
-}, { collection: 'Medicos', timestamps: true }); // Timestamps tiempos de creacion del dato, Collection: nombre de la db
+}, { collection: 'medicos', timestamps: true }); // Timestamps tiempos de creacion del dato, Collection: nombre de la db
 
 
 // Elimina el __v a la hora de guardar en mongodb

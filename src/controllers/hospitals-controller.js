@@ -7,11 +7,15 @@ const HospitalModel = require('../models/hospital-model');
 * @function {@link createHospital()} - Crear un usuario
 * @function {@link updateHospital()} - Actualizar un usuario
 * @function {@link deleteHospital()} - Eliminar un usuario ( Cambia el status a 0 )
+* 
 */
 
-const getHospitals = (req, res = response ) => {
+const getHospitals = async(req, res = response ) => {
 
-  res.json( { msg: 'Todo bien' } );
+    const hospitales = await HospitalModel.find() // populate nos trae la informacion del usuario por su Id
+                                          .populate('usuario', 'name email');
+
+  res.json( { msg: 'Todo bien', Hospitales: hospitales } );
 
 }
 

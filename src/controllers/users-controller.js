@@ -28,19 +28,32 @@ const bcrypt = require('bcryptjs');
 
 const getUsers = async(req, res ) => {
 
+  // Se castea de string a numerico, si no me manda el valor utiliza el 0
+  const desde = Number(req.query.desde) || 0;
+
+
   /**
    * @var {{status: 1}} - En esta peticion buscamos todos los usuarios con status 1 : WHERE status = 1;
-   * @var { name email role google } - Los campos de la base de datos que nos va a traer
+   * @var {'name email role google'} - Los campos de la base de datos que nos va a traer
    */
 
-  const usuario = await UsuarioModel.find({ status: 1}, 'name email role google');
+
+  // Ejecuta todas las promesas, es una colección de promesas
+  const [usuario , total ] = Porimse.all([
+    UsuarioModel.find({ status: 1}, 'name email role google')
+                .skip( desde )
+                .limit( 5 ),
+    // Nos cuenta el total de registros  
+    Usuario.count()
+  ])
 
     res.json({
       ok:true,
       mg: 'Get Usuario',
-      usuarios: [usuario]
+      usuarios: [usuario],
+      total
     });
-}
+};
 
 const createUser = async(req, res = response ) => {
 
@@ -66,8 +79,7 @@ const createUser = async(req, res = response ) => {
 
   }
 
-  res.json({ ok:true, usuario: usuario });
-}
+};
 
 const updateUser = async(req, res = response ) => { 
 

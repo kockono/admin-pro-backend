@@ -18,7 +18,8 @@ let HospitalSchema = new Schema({
         }, 
         usuario: { 
           type: Schema.Types.ObjectId,
-          required: true
+          required: true,
+          ref: 'Users'
         },
         status:{
           type: Number,

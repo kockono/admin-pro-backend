@@ -22,9 +22,10 @@ app.use(express.urlencoded({ extended: true })); // parse application/x-www-form
 app.use('/api/users', require('./routes/users.routes') );
 app.use('/api/hospital', require('./routes/hospitales.routes') );
 app.use('/api/medicos', require('./routes/medicos.routes') );
-app.use('/api/login', require('./routes/auth.routes') );
-app.use('/api/uploads', require('./routes/uploads.routes') );
 app.use('/api/todo', require('./routes/busquedas.routes') );
+app.use('/api/login', require('./routes/auth.routes') );
+
+app.use('/api/uploads', require('./routes/uploads.routes') );
 
 // Server
 app.listen(PORT, () => console.log(`Escuchando por el puerto ${PORT}`) );

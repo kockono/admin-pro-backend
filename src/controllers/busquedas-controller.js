@@ -1,17 +1,16 @@
 const { response } = require('express');
 
 /** ----------------------------------- Controllers -----------------------------------
-* @function {@link getHospitals()}   - Traer todos los usuarios 
-* @function {@link createHospital()} - Crear un usuario
-* @function {@link updateHospital()} - Actualizar un usuario
-* @function {@link deleteHospital()} - Eliminar un usuario ( Cambia el status a 0 )
+* @function {@link getTodo()}   - Traer todos los usuarios 
 * 
 */
 
 // Todo: Video 130 Minuto 4:00, Continuar con el buscador
 const getTodo = async (req, res = response ) => {
+
+    const objetoBuscado = req.body.busqueda;
     
-      const medico = await MedicoModel.find({ status: 1}, 'name email role google')
+    const medico = await MedicoModel.find({ status: 1}, 'name email role google')
                                       .populate('hospital', 'name')
                                       .populate('usuario', 'name');
   
@@ -22,4 +21,8 @@ const getTodo = async (req, res = response ) => {
       });
   
   
+  }
+
+  module.exports = {
+    getTodo
   }

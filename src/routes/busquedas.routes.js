@@ -4,9 +4,9 @@ const { Router } = require('express');
 const { validateJwt } = require('../middlewares/validate-jwt');
 
 // Controllers
-const { getMedicos, createMedico, updateMedico, deleteMedico } = require('../controllers/medicos-controller');
+const { getTodo } = require('../controllers/busquedas-controller');
 
-// Validadors de body, formularios, post
+// Validadors de body, formularios, post, put, delete, update
 const { check } = require('express-validator'); // Version  6.14.1
 const { validateForms } = require('../middlewares/validate-fields');  
 
@@ -14,13 +14,11 @@ const router = Router();
 
 /**
  * ----------------------------- Apis -----------------------------------
- * @api_createMedico  POST http://localhost:3501/api/medicos/create  
- * @api_getMedicos    GET  http://localhost:3501/api/medicos/        
+ * @api_busqueda GET http://localhost:3501/api/todo/:busqueda  
  * 
  */
  
-
- router.get('/:busqueda',  getMedicos );
+ router.get('/:busqueda',  validarJWT, getTodo );
 
  router.post('/create', 
    [

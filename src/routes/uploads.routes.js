@@ -1,14 +1,14 @@
 const { Router } = require('express');
+
 // Controllers
+const { fileUpload } = require('../controllers/upload-controller');
 
 // Validadors de body, formularios, post
-const { check } = require('express-validator'); // Version  6.14.1
-const { validateForms } = require('../middlewares/validate-fields');  
 const { validateJwt } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
 
-router.get('/tipo/:id', validateJwt, );
+router.put('/:tipo/:id', validateJwt, fileUpload);
 
 module.exports = router;

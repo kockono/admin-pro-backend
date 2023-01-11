@@ -24,8 +24,7 @@ app.use('/api/hospital', require('./routes/hospitales.routes') );
 app.use('/api/medicos', require('./routes/medicos.routes') );
 app.use('/api/todo', require('./routes/busquedas.routes') );
 app.use('/api/login', require('./routes/auth.routes') );
-
-app.use('/api/uploads', require('./routes/uploads.routes') );
+app.use('/api/uploads', require('./routes/uploads.routes') ); // Subida de archivos
 
 // Server
 app.listen(PORT, () => console.log(`Escuchando por el puerto ${PORT}`) );

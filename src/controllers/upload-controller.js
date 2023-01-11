@@ -7,9 +7,8 @@ const fileUpload = ( req, res = response ) => {
     const tipo = req.params.tipo;
     const id   = req.params.id;
 
-    const tipoValidos = ['hospitales', 'medicos', 'usuarios'];
 
-    if( !tipoValidos.includes(tipo)) {
+    if( validarTipo() ) {
         return res.status(400).json({
             ok:false,
             msg: 'No es un médico, usuario u hospital'
@@ -25,26 +24,26 @@ const fileUpload = ( req, res = response ) => {
     }
 
     // Procesar la imagen...
-    const imagen = req.files.imagen;
+    const file = req.files.imagen;
 
-    const nombreCortado = imagen.name.split('.'); // ejemplo.1.2.jpg
+    const nombreCortado = file.name.split('.'); // ejemplo.1.2.jpg
     const extensionArchivo = nombreCortado[ nombreCortado.length - 1]; // Ultima posición
 
     // Validar extension
-    if( validarExtension(extensionArchivo) ) {
+    if( validarExtensionArchivo(extensionArchivo) ) {
         return res.status(400).json({
             ok:false,
             msg: 'No es una extensión permitida'
         });
     }
-    console.log( extensionArchivo )
+
     // Generar el nombre del archivo
     const nombreArchivo = `${uuidv4()}.${extensionArchivo}`;
 
     // Path para guardar la imagen
     const path = `./src/uploads/${ tipo }/${ nombreArchivo }`;
     // Usar mv para mover la imagen donde quieras
-    imagen.mv(path, (err) => {
+    file.mv(path, (err) => {
         if (err){
             console.log( err )
             return res.status(500).json({
@@ -59,9 +58,14 @@ const fileUpload = ( req, res = response ) => {
 
 }
 
-function validarExtension( extensionArchivo ) {
+function validarExtensionArchivo( extensionArchivo ) {
     const extensionesValidas = ['png', 'jpg', 'jpeg', 'gif'];
     return !extensionesValidas.includes(extensionArchivo);
+}
+
+function validarTipo() {
+    const tipoValidos = ['hospitales', 'medicos', 'usuarios'];
+    return !tipoValidos.includes(tipo)
 }
 
 

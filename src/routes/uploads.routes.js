@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 // Controllers
-const { fileUpload } = require('../controllers/upload-controller');
+const { fileUpload, retornarImagen } = require('../controllers/upload-controller');
 
 // Validadors de body, formularios, post
 const { validateJwt } = require('../middlewares/validate-jwt');
@@ -15,5 +15,6 @@ const router = Router();
 router.use(expressFileUpload());
 
 router.put('/:tipo/:id', validateJwt, fileUpload);
+router.get('/:tipo/:foto', retornarImagen);
 
 module.exports = router;

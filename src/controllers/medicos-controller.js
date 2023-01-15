@@ -17,14 +17,14 @@ const getMedicos = async (req, res = response ) => {
    * @populate - Los campos de la base de datos que nos va a traer por medio de la id
    */
   
-    const medico = await MedicoModel.find({ status: 1}, 'name email role google')
+    const medico = await MedicoModel.find({ status: 1}, 'name email role google img')
                                     .populate('hospital', 'name')
                                     .populate('usuario', 'name');
 
     res.json({
       ok:true,
       msg: 'Get medico',
-      medicos: [medico]
+      medicos: medico
     });
 
 
@@ -33,10 +33,9 @@ const getMedicos = async (req, res = response ) => {
 const createMedico = async (req, res = response ) => {
 
     const uid = req.uid;
-    const medico  = await new MedicoModel( { 
+    const medico  = new MedicoModel( { 
         usuario: uid,
         ...req.body
-
     } ); 
 
   

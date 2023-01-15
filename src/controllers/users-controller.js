@@ -39,18 +39,18 @@ const getUsers = async(req, res ) => {
 
 
   // Ejecuta todas las promesas, es una colección de promesas
-  const [usuario , total ] = Porimse.all([
-    UsuarioModel.find({ status: 1}, 'name email role google')
+  const [usuarios , total ] = await Promise.all([
+    UsuarioModel.find({ status: 1}, 'name email role google img')
                 .skip( desde )
                 .limit( 5 ),
     // Nos cuenta el total de registros  
-    Usuario.count()
+    UsuarioModel.countDocuments()
   ])
 
     res.json({
       ok:true,
       mg: 'Get Usuario',
-      usuarios: [usuario],
+      usuarios,
       total
     });
 };

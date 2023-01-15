@@ -8,13 +8,13 @@ const { Schema, model } = require('mongoose');
  * @var collection - Nos permite renombrar en la base de datos el nombre de la tabla ( Siempre agrega una 'S')
  */
 
-let MedicosSchema = new Schema({
+let MedicosSchema = Schema({
         name: {
             type: String,
             required: true
         },
         img: {
-          type: String
+          type: String,
         }, 
         usuario: { 
           type: Schema.Types.ObjectId,

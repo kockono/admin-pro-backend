@@ -6,7 +6,7 @@ const { Schema, model } = require('mongoose');
  * @var default - Dato asignado por default
  */
 
-let usuariosSchema = new Schema({
+let usuariosSchema = Schema({
         name: {
             type: String,
             required: true
@@ -22,7 +22,7 @@ let usuariosSchema = new Schema({
             required: true
         },
         img: {
-          type: String
+          type: String,
         },
         role:{
             type:String,

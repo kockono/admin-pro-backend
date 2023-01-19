@@ -11,10 +11,15 @@ connectLocalDB();
 
 const app = express();
 
+// Puerto del servidor
 const { PORT } = require('./config/properties');
+
+// Swagger
+const { swaggerDocs: V1SwaggerDocs } = require('./swagger.js');
 
 // peticiones a backend, personalizado: app.use(cors({ localhost:4200 }));
 app.use(cors());
+
 
 app.use(express.json()); // Read and parse application/json
 
@@ -32,5 +37,8 @@ app.use('/api/login', require('./routes/auth.routes') );
 app.use('/api/uploads', require('./routes/uploads.routes') ); // Subida de archivos
 
 // Server
-app.listen(PORT, () => console.log(`Escuchando por el puerto ${PORT}`) );
+app.listen(PORT, () => {
+    console.log(`Escuchando por el puerto ${ PORT }`);
+    V1SwaggerDocs(app, PORT);
+});
 

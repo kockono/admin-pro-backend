@@ -19,6 +19,15 @@ const getHospitals = async(req, res = response ) => {
 
 }
 
+const getHospitalById = async(req, res = response ) => {
+    const idHospital = req.params.id;
+    const hospitales = await HospitalModel.findById(idHospital) // populate nos trae la informacion del usuario por su Id
+                                          .populate('usuario', 'name email');
+
+  res.json( { msg: 'Todo bien', Hospitales: hospitales } );
+
+}
+
 const createHospital = async (req, res = response ) => {
 
     const uid = req.uid;
@@ -127,5 +136,6 @@ module.exports = {
   getHospitals,
   createHospital,
   updateHospital,
-  deleteHospital
+  deleteHospital,
+  getHospitalById
 }

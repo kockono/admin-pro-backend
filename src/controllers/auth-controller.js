@@ -49,8 +49,71 @@ const logout = async(req, res = response ) => {
 
 };
 
+const googleSignIn = async( req, res = response ) => {
+
+    try {
+        const { email, name, picture } = await googleVerify( req.body.token );
+
+        const usuarioDB = await Usuario.findOne({ email });
+        let usuario;
+
+        // Si el usuario no existe lo guarda en la base de datos, tomando a consideración los datos que te otorga google
+        if ( !usuarioDB ) {
+            usuario = new Usuario({
+                name: name,
+                email,
+                password: '@@@',
+                img: picture,
+                google: true
+            })
+        } else {
+            usuario = usuarioDB;
+            usuario.google = true;
+            // usuario.password = '@@';
+        }
+
+        // Guardar Usuario
+        await usuario.save();
+
+        // Generar el TOKEN - JWT
+        const token = await generateJWT( usuario.id );
+
+
+        res.json({
+            ok: true,
+            email, name, picture,
+            token
+        });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: false,
+            msg: 'Token de Google no es correcto'
+        });
+    }
+    
+}
+
+const renewToken = async (req, res = response ) => {
+
+    const uid = req.uid
+
+    // Generar el TOKEN - JWT
+    const token = await generateJWT( uid );
+
+    res.json({
+        ok:true,
+        uid
+    })
+}
+
+
+
 
 module.exports = {
   login,
-  logout
+  logout,
+  googleSignIn,
+  renewToken
 }

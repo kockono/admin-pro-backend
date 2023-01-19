@@ -1,0 +1,23 @@
+ components:
+  securitySchemes:
+  BasicAuth:            # arbitrary name for the security scheme
+    type: http
+    scheme: basic
+  security:
+    - BasicAuth: []  
+  schemas:
+    Hospital:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 630afe31a534639dda6fb930
+          description: Id del hospital
+        name:  
+          type: string
+          example: Hospital del norte
+          description: Nombre del hospital
+
+
+
+ 

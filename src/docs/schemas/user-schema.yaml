@@ -1,0 +1,17 @@
+ components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          example: chris2@gmail.com
+          description: Nombre del usuario
+        password:
+          type: string
+          example: 123456
+          description: Contraseña del usuario
+
+
+
+ 

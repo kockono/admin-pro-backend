@@ -1,0 +1,16 @@
+# Api: http://localhost:3501/api/login
+/api/login:
+  post:
+    summary: Ingresar con usuario normal
+    tags: [User]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: '#/components/schemas/User'
+    responses:
+      200:
+        description: Login satisfactorio
+  

@@ -1,0 +1,32 @@
+# Api: PUT http://localhost:3501/api/hospital/:id
+/api/hospital/{id}:
+  put:
+    summary: Actualiza el hospital por medio de la id
+    description:
+    parameters:
+     - name: id
+       in: path
+       required: true
+    tags: [Hospital]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: '#/components/schemas/Hospital'
+    responses:
+      200:
+        description: Actualización del hospital satisfactorio
+# Api: GET http://localhost:3501/api/hospital/:id
+  get:
+    summary: Retorna un hospital por medio de la id
+    description: Ejemplo 630afe31a534639dda6fb930
+    tags: [Hospital]
+    parameters:
+     - name: id
+       in: path
+       required: true
+    responses:
+      200:
+        description: OK

@@ -9,13 +9,7 @@ const { validateJwt } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
-/**
- * ----------------------------- Apis -----------------------------------
- * @api_login POST  http://localhost:3501/api/login/  
- * 
- * ------------------ Explicaciones De Controllers -----------------------
- * @login - Verifica si el email y password son iguales para loguearse
- */
+
 
 router.post('/', 
   [

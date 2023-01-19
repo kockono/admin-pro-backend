@@ -32,12 +32,16 @@ const router = Router();
  
  router.put('/:id',
      [
-
+        validateJwt,
+        check('name','El nombre del hospital es necesario').not().isEmpty(),
+        validateForms
      ],
      updateHospital
  );
  
- router.put('/delete/:id', deleteHospital);
+ router.delete('/:id', deleteHospital);
+
+//  router.put('/delete/:id', deleteHospital);
 
 
 module.exports = router;

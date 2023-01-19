@@ -56,18 +56,76 @@ const createMedico = async (req, res = response ) => {
 
 }
 
-const updateMedico = (req, res = response ) => {
+const updateMedico = async(req, res = response ) => {
 
-  res.json( { msg: 'Todo bien' } );
+    const medicoId = req.params.id;
+    const uid = req.params.uid;
+
+    // Es bueno cuando se requiere manipular datos de la base de datos
+    try {
+
+        const medico = await MedicoModel.findById( medicoId );
+
+        if( !medico ) {
+            return res.status(404).json({
+                ok:false,
+                msg:'Medico no encontrado'
+            })
+        }
+
+        const cambiosMedico = {
+            ...req.body,
+            usuario: uid // Así se quien fue la ultima persona que modifico el archivo
+        }
+    // medicoId: la id del Medico, cambiosMedico: Los cambios realizados, { new:true }: Traeme los ultimos cambios
+        const medicoActualizado = await MedicoModel.findByIdAndUpdate(medicoId, cambiosMedico, { new: true });
+
+        res.json({ 
+            ok:true,
+            msg: 'Actualizado correctamente',
+            medico: medicoActualizado
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'hable con el administrador'
+        })
+    }
 
 }
 
-const deleteMedico = (req, res = response ) => {
+const deleteMedico = async(req, res = response ) => {
 
-  res.json( { msg: 'Todo bien' } );
+    const medicoId = req.params.id;
+
+    // Es bueno cuando se requiere manipular datos de la base de datos
+    try {
+
+        const medico = await MedicoModel.findById( medicoId );
+
+        if( !medico ) {
+            return res.status(404).json({
+                ok:false,
+                msg:'Medico no encontrado'
+            })
+        }
+
+        await MedicoModel.findByIdAndDelete( medicoId );
+
+        res.json({ 
+            ok: true,
+            msg: 'Eliminado correctamente',
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'hable con el administrador'
+        })
+    }
 
 }
-
 
 
 module.exports = {

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const connectLocalDB = require('./database/mongoDBLocal');
@@ -17,6 +19,9 @@ app.use(cors());
 app.use(express.json()); // Read and parse application/json
 
 app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
+
+// Carpeta pública
+app.use( express.static('src/public') );
 
 // Routes
 app.use('/api/users', require('./routes/users.routes') );

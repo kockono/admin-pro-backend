@@ -50,15 +50,74 @@ const createHospital = async (req, res = response ) => {
 
 }
 
-const updateHospital = (req, res = response ) => {
+const updateHospital = async(req, res = response ) => {
 
-  res.json( { msg: 'Todo bien' } );
+    const hospitalId = req.params.id;
+    const uid = req.params.uid;
+
+    // Es bueno cuando se requiere manipular datos de la base de datos
+    try {
+
+        const hospital = await HospitalModel.findById( hospitalId );
+
+        if( !hospital ) {
+            return res.status(404).json({
+                ok:false,
+                msg:'Hospital no encontrado por id'
+            })
+        }
+
+        const cambiosHospital = {
+            ...req.body,
+            usuario: uid // Así se quien fue la ultima persona que modifico el archivo
+        }
+    // hospitalId: la id del hospital, cambiosHospital: Los cambios realizados, { new:true }: Traeme los ultimos cambios
+        const hospitalActualizado = await HospitalModel.findByIdAndUpdate(hospitalId, cambiosHospital, { new: true });
+
+        res.json({ 
+            ok:true,
+            msg: 'Actualizado correctamente',
+            hospital: hospitalActualizado
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'hable con el administrador'
+        })
+    }
 
 }
 
-const deleteHospital = (req, res = response ) => {
+const deleteHospital = async(req, res = response ) => {
 
-  res.json( { msg: 'Todo bien' } );
+    const hospitalId = req.params.id;
+
+    // Es bueno cuando se requiere manipular datos de la base de datos
+    try {
+
+        const hospital = await HospitalModel.findById( hospitalId );
+
+        if( !hospital ) {
+            return res.status(404).json({
+                ok:false,
+                msg:'Hospital no encontrado por id'
+            })
+        }
+
+        await HospitalModel.findByIdAndDelete( hospitalId);
+
+        res.json({ 
+            ok:true,
+            msg: 'Eliminado correctamente',
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'hable con el administrador'
+        })
+    }
 
 }
 

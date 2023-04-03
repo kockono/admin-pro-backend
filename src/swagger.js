@@ -21,17 +21,8 @@ const options = {
     apis: [
         'src/routes/*.js', 
         'src/docs/schemas/*.yaml', 
-        'src/docs/apis/*.yaml', 
-        'src/src/swagger.js', 
-    ],
-    components: {
-        securitySchemes: {
-          basicAuth: {
-            type: "http",
-            scheme: "basic",
-          },
-        },
-      }
+        'src/docs/apis/*.yaml'
+    ]
 }
 
 // Documentación en JSON Formato

@@ -1,5 +1,9 @@
  components:
   schemas:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
     User:
       type: object
       properties:

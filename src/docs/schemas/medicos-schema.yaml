@@ -1,0 +1,42 @@
+ components:
+  schemas:
+    Medico:
+      type: object
+      properties:
+        name:
+          type: string
+          example: chris2@gmail.com
+          description: Nombre del usuario
+        usuario:
+          type: string
+          example: 123456
+          description: Contraseña del usuario
+        img:
+          type: file
+          description: Contraseña del usuario
+        status:
+          type: Number
+          description: El 1 = Activo, 0 = Suspendido, -1 = Eliminado
+
+
+  # name: {
+  #           type: String,
+  #           required: true
+  #       },
+  #       img: {
+  #         type: String,
+  #       }, 
+  #       usuario: { 
+  #         type: Schema.Types.ObjectId,
+  #         ref:'Users',
+  #         required: true
+  #       },
+  #       hospital: { 
+  #           type: Schema.Types.ObjectId, // La Id del hospital
+  #           ref:'Hospitales', // Al Modelo que hace referencia, Cuentan las Mayusculas y Minusculas
+  #           required: true
+  #       },
+  #       status:{
+  #         type: Number,
+  #         default: 1
+  #       }
